@@ -1,0 +1,38 @@
+------ This query is my first project using sql ---
+
+DROP TABLE IF EXISTS patient_demography;
+-- Create table
+CREATE TABLE patient_demography (
+  patient_id VARCHAR(30) PRIMARY KEY,
+  patient_name VARCHAR(30),
+  addmission_reason VARCHAR(40),
+  age INT,
+  sex VARCHAR(30)
+);
+-- Insert values
+INSERT INTO patient_demography VALUES ('URN11', 'Ibrahim', 'Cancer', 65, 'Female');
+INSERT INTO patient_demography VALUES ('URN7', 'Taiwo', 'Stroke', 55, 'Female');
+INSERT INTO patient_demography VALUES ('URN9', 'Nurain', 'Diabetes', 42, 'Male');
+INSERT INTO patient_demography VALUES ('URN8', 'Joel', 'Cancer', 60, 'Male');
+INSERT INTO patient_demography VALUES ('URN10', 'Mustapha', 'Cardiology', 70, 'Male');
+INSERT INTO patient_demography VALUES ('URN5', 'Muritadoh', 'Diabetes', 64, 'Male');
+INSERT INTO patient_demography VALUES ('URN2', 'Yusuf', 'Diabetes', 50, 'Female');
+INSERT INTO patient_demography VALUES ('URN3', 'Habeebah', 'Stroke', 45, 'Female');
+INSERT INTO patient_demography VALUES ('URN1', 'Tomiwa', 'Stroke', 38, 'Male');
+INSERT INTO patient_demography VALUES ('URN4', 'Gbadebo', 'Cancer', 66, 'Female');
+INSERT INTO patient_demography VALUES ('URN12', 'Tolu', 'Mental Health', 41, 'Male');
+INSERT INTO patient_demography VALUES ('URN16', 'Abebe', 'Renal', 51, 'Male');
+INSERT INTO patient_demography VALUES ('URN24', 'Tasew', 'Stroke', 55, 'Female');
+INSERT INTO patient_demography VALUES ('UR17', 'Ahmed', 'Renal', 42,'Male');
+INSERT INTO patient_demography VALUES ('UR13', 'Fraser', 'Cancer', 63, 'Female');
+INSERT INTO patient_demography VALUES ('URN23', 'Groom', 'Cardiology', 56, 'Female');
+INSERT INTO patient_demography VALUES ('URN15', 'Mengistu', 'Diabetes', 36, 'Male');
+INSERT INTO patient_demography VALUES ('URN21', 'Fekadu', 'Mental Health', 74);
+INSERT INTO patient_demography VALUES ('URN19', 'La', 'Cardiology', 70, 'Female');
+INSERT INTO patient_demography VALUES ('URN22', 'Ho', 'Renal', 72, 'Female');
+INSERT INTO patient_demography VALUES ('URN14', 'Charl', 'Cancer', 69,'Male');
+INSERT INTO patient_demography VALUES ('URN18', 'Elie', 'Mental Health', 50, 'Female');
+
+-- Select all field names
+SELECT *
+FROM patient_demography;
