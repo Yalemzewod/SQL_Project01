@@ -1,38 +1,82 @@
------- This query is my first project using sql ---
 
+
+------ This query is my first project using SQL ---
 DROP TABLE IF EXISTS patient_demography;
 -- Create table
 CREATE TABLE patient_demography (
-  patient_id VARCHAR(30) PRIMARY KEY,
+  patient_id VARCHAR(30) PRIMARY KEY NOT NULL,
   patient_name VARCHAR(30),
   addmission_reason VARCHAR(40),
   age INT,
-  sex VARCHAR(30)
+  sex VARCHAR(30),
+  Registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 -- Insert values
-INSERT INTO patient_demography VALUES ('URN11', 'Ibrahim', 'Cancer', 65, 'Female');
-INSERT INTO patient_demography VALUES ('URN7', 'Taiwo', 'Stroke', 55, 'Female');
-INSERT INTO patient_demography VALUES ('URN9', 'Nurain', 'Diabetes', 42, 'Male');
-INSERT INTO patient_demography VALUES ('URN8', 'Joel', 'Cancer', 60, 'Male');
-INSERT INTO patient_demography VALUES ('URN10', 'Mustapha', 'Cardiology', 70, 'Male');
-INSERT INTO patient_demography VALUES ('URN5', 'Muritadoh', 'Diabetes', 64, 'Male');
-INSERT INTO patient_demography VALUES ('URN2', 'Yusuf', 'Diabetes', 50, 'Female');
-INSERT INTO patient_demography VALUES ('URN3', 'Habeebah', 'Stroke', 45, 'Female');
-INSERT INTO patient_demography VALUES ('URN1', 'Tomiwa', 'Stroke', 38, 'Male');
-INSERT INTO patient_demography VALUES ('URN4', 'Gbadebo', 'Cancer', 66, 'Female');
-INSERT INTO patient_demography VALUES ('URN12', 'Tolu', 'Mental Health', 41, 'Male');
-INSERT INTO patient_demography VALUES ('URN16', 'Abebe', 'Renal', 51, 'Male');
-INSERT INTO patient_demography VALUES ('URN24', 'Tasew', 'Stroke', 55, 'Female');
-INSERT INTO patient_demography VALUES ('UR17', 'Ahmed', 'Renal', 42,'Male');
-INSERT INTO patient_demography VALUES ('UR13', 'Fraser', 'Cancer', 63, 'Female');
-INSERT INTO patient_demography VALUES ('URN23', 'Groom', 'Cardiology', 56, 'Female');
-INSERT INTO patient_demography VALUES ('URN15', 'Mengistu', 'Diabetes', 36, 'Male');
-INSERT INTO patient_demography VALUES ('URN21', 'Fekadu', 'Mental Health', 74);
-INSERT INTO patient_demography VALUES ('URN19', 'La', 'Cardiology', 70, 'Female');
-INSERT INTO patient_demography VALUES ('URN22', 'Ho', 'Renal', 72, 'Female');
-INSERT INTO patient_demography VALUES ('URN14', 'Charl', 'Cancer', 69,'Male');
-INSERT INTO patient_demography VALUES ('URN18', 'Elie', 'Mental Health', 50, 'Female');
+INSERT INTO patient_demography VALUES ('URN11', 'Ibrahim', 'Cancer', 65, 'Female', '2016-06-31');
+INSERT INTO patient_demography VALUES ('URN7', 'Taiwo', 'Stroke', 55, 'Female', '2016-01-25');
+INSERT INTO patient_demography VALUES ('URN9', 'Nurain', 'Diabetes', 42, 'Male', '2016-04-12');
+INSERT INTO patient_demography VALUES ('URN8', 'Joel', 'Cancer', 60, 'Male', '2016-02-05');
+INSERT INTO patient_demography VALUES ('URN10', 'Mustapha', 'Cardiology', 70, 'Male', '2016-06-07');
+INSERT INTO patient_demography VALUES ('URN5', 'Muritadoh', 'Diabetes', 64, 'Male', '2016-08-09');
+INSERT INTO patient_demography VALUES ('URN2', 'Yusuf', 'Diabetes', 50, 'Female', '2016-09-06');
+INSERT INTO patient_demography VALUES ('URN3', 'Habeebah', 'Stroke', 45, 'Female', '2016-07-03');
+INSERT INTO patient_demography VALUES ('URN1', 'Tomiwa', 'Stroke', 38, 'Male', '2016-03-04');
+INSERT INTO patient_demography VALUES ('URN4', 'Gbadebo', NULL, 66, 'Female', '2016-07-06');
+INSERT INTO patient_demography VALUES ('URN12', 'Tolu', 'Mental Health', 41, 'Male', '2016-05-12');
+INSERT INTO patient_demography VALUES ('URN16', 'Abebe', 'Renal', 51, 'Male', '2016-07-09');
+INSERT INTO patient_demography VALUES ('URN24', 'Tasew', 'Stroke', 55, 'Female', '2016-01-28');
+INSERT INTO patient_demography VALUES ('UR17', 'Ahmed', 'Renal', 42, 'Male', '2016-09-21');
+INSERT INTO patient_demography VALUES ('UR13', 'Fraser', 'Cancer', NULL, 'Female', '2016-04-03');
+INSERT INTO patient_demography VALUES ('URN23', 'Groom', 'Cardiology', 56, 'Female', '2016-05-23');
+INSERT INTO patient_demography VALUES ('URN15', 'Mengistu', 'Diabetes', 36, 'Male', '2016-060-29');
+INSERT INTO patient_demography VALUES ('URN21', 'Fekadu', 'Mental Health', 74,'','2016-03-27');
+INSERT INTO patient_demography VALUES ('URN19', 'La', NULL, 70, 'Female', '2016-08-26');
+INSERT INTO patient_demography VALUES ('URN22', 'Ho', 'Renal', 72, 'Female', '2016-08-22');
+INSERT INTO patient_demography VALUES ('URN14', 'Charl', 'Cancer', NULL, 'Male', '2016-04-20');
+INSERT INTO patient_demography VALUES ('URN18', 'Elie', 'Mental Health', 50, 'Female', '2016-07-25');
 
 -- Select all field names
 SELECT *
 FROM patient_demography;
+
+-- Delete the last row in a table
+DELETE FROM patient_demography
+ORDER BY id DESC LIMIT 1;
+/*
+EDA
+- check null values
+- count null
+- explore 
+*/
+-- where age is null
+SELECT patient_id, COUNT(*)
+FROM patient_demography
+WHERE age IS NULL
+GROUP BY patient_id;
+
+-- Check the sex column
+SHOW COLUMNS FROM patient_demography LIKE 'sex';
+
+-- count patient age >50
+SELECT COUNT(*) AS total_count
+FROM patient_demography
+WHERE age > 50;
+
+-- count patient age >50 and Female
+SELECT COUNT(*) AS total_count
+FROM patient_demography
+WHERE age > 50
+AND sex ='Female';
+
+/*
+Calculate the mean age and update the missing age with it
+*/
+SELECT AVG(age) AS mean_age
+FROM patient_demography
+WHERE age IS NOT NULL;
+
+-- Update the age column
+UPDATE patient_demography
+SET age = (SELECT AVG(age) FROM patient_demography WHERE age IS NOT NULL)
+WHERE age IS NULL;
+
