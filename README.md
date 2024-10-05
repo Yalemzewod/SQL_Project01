@@ -3,7 +3,6 @@
 - Create table and data manipulation using SQL
 
 ```
-%sql
 DROP TABLE IF EXISTS patient_demography;
 -- Create table
 CREATE TABLE patient_demography (
