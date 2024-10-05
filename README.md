@@ -28,6 +28,9 @@ FROM patient_demography
 WHERE age IS NULL
 GROUP BY patient_id;
 ```
+UR13	1
+URN14	1
+
 Select count where age is >50 and female
 ```
 -- count patient age >50 and Female
