@@ -3,6 +3,7 @@
 - Create table and data manipulation using SQL
 
 ```
+%sql
 DROP TABLE IF EXISTS patient_demography;
 -- Create table
 CREATE TABLE patient_demography (
@@ -14,3 +15,9 @@ CREATE TABLE patient_demography (
   Registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
+
+```
+-- View all field names
+SELECT *
+FROM patient_demography;
+``
