@@ -14,9 +14,26 @@ CREATE TABLE patient_demography (
   Registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
-
+View all rows and columns in the table
 ```
 -- View all field names
 SELECT *
 FROM patient_demography;
-``
+```
+Patients where age is null
+```
+-- Filter patient_id where age is null
+SELECT patient_id, COUNT(*)
+FROM patient_demography
+WHERE age IS NULL
+GROUP BY patient_id;
+```
+Select count where age is >50 and female
+```
+-- count patient age >50 and Female
+SELECT COUNT(*) AS total_count
+FROM patient_demography
+WHERE age > 50
+AND sex ='Female';
+
+```
